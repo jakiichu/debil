@@ -1,4 +1,5 @@
-<?php
+
+<br><?php
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -6,9 +7,7 @@ use yii\bootstrap4\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = 'Create User';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Регистация';
 ?>
 <div class="user-create">
 

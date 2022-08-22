@@ -13,12 +13,40 @@ $this->title = $model->name;
     <br>
 
     <p class='display-2'><?php print($model->name) ?></p>
-    <img src="<?php print($model->file) ?>" style="display:block; margin:auto; height:800px;">
+    <div class="row row-cols-2">
+        <div class="col image">
+            <img value="<?php print($model->file) ?>" data-toggle="modal" data-target="#exampleModal" v-on:click="image" src="<?php print($model->file) ?>" style=" height:400px;">
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="margin: auto;height:1000px;">
+                    <div class="modal-content" style="height:1000px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <img  src="<?php print($model->file) ?>" style="height:1000px;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <p class='blockquote' style="height:600px;"><?php print($model->text) ?></p>
+        </div>
+
+    </div>
+
+
+    <br>
     <br>
 
     <p class='display-2' style='   text-align: right;'><?php print($model->price) ?> руб.</p>
     <hr>
-    <p class='blockquote'><?php print($model->text) ?></p>
     <h3>Харектеристики</h3>
     <hr>
     <h4>Категория</h4>
@@ -58,5 +86,5 @@ $this->title = $model->name;
     </div>
 
 
-
+    
 </div>

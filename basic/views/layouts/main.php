@@ -52,7 +52,7 @@ AppAsset::register($this);
                 ['label' => 'Каталог', 'url' => ['/poduct']],
                 ['label' => 'Таблица Размеров', 'url' => ['/site/size']],
                 ['label' => 'О нас', 'url' => ['/site/about']],
-                Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]
+                Yii::$app->user->isGuest ? (['label' => 'Авторизация', 'url' => ['/site/login']]
                 ) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                     . Html::submitButton(

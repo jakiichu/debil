@@ -186,7 +186,7 @@ class PoductController extends Controller
             return $material;
         }
 
-        throw new NotFoundHttpException('коментов еще нету');
+        throw new NotFoundHttpException('не указан материал');
     }
 
     protected function SeasonSearch($id)
@@ -195,7 +195,7 @@ class PoductController extends Controller
             return $season;
         }
 
-        throw new NotFoundHttpException('коментов еще нету');
+        throw new NotFoundHttpException('сезон не указан');
     }
 
     protected function ManufacturerSearch($id)
@@ -204,6 +204,6 @@ class PoductController extends Controller
             return $manufacturer;
         }
 
-        throw new NotFoundHttpException('коментов еще нету');
+        throw new NotFoundHttpException('производитель не указан');
     }
 }

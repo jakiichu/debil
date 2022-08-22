@@ -21,7 +21,7 @@ $this->title = 'Poducts';
     }
 </style>
 <br>
-<div style="text-align:right;" id="app-6">
+<div class="search" style="text-align:right;" id="app-6">
     <input class="form-label" v-model="message">
     <a class="btn btn-success btn-sm" v-bind:href="'poduct?PoductSearch%5Bid%5D=&PoductSearch%5Bname%5D=' + message + '&PoductSearch%5Bfile%5D=&PoductSearch%5Bprice%5D=&PoductSearch%5Btext%5D=&PoductSearch%5Bcategory_id%5D=&PoductSearch%5Bdate%5D=&PoductSearch%5Bseason_id%5D=&PoductSearch%5Bmaterial_id%5D=&PoductSearch%5Bmanufacturer_id%5D='">Поиск</a>
 </div>
@@ -45,6 +45,7 @@ $this->title = 'Poducts';
                             <?php foreach ($category->getModels() as $category) { ?>
                                 <a>
                                     <p>
+                                    
 
                                         <div class="custom-control custom-radio mb-3">
                                             <input value="<?php print($category->id)  ?>" v-model="category" name="custom-radio-1" class="custom-control-input" id="<?php print($category->name)  ?>" type="radio">
@@ -97,7 +98,7 @@ $this->title = 'Poducts';
                             <a>
                                 <p>
                                     <div class="custom-control custom-radio mb-3">
-                                        <input value="<?php print($season->id)  ?>" v-model="season"  name="custom-radio-1" class="custom-control-input" id="<?php print($season->name)  ?>" type="radio">
+                                        <input value="<?php print($season->id)  ?>" v-model="season" name="custom-radio-1" class="custom-control-input" id="<?php print($season->name)  ?>" type="radio">
                                         <label class="custom-control-label" for="<?php print($season->name)  ?>"><?php print($season->name)  ?></label>
                                     </div>
 
@@ -139,7 +140,7 @@ $this->title = 'Poducts';
 
     </div>
     <br><br><br>
-    <div class="row row-cols-3">
+    <div class="row row-cols-3 getDataProvider">
 
         <?php foreach ($dataProvider->getModels() as $model) { ?>
 
