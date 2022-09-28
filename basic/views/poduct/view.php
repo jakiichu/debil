@@ -12,6 +12,7 @@ $this->title = $model->name;
 <div class="poduct-view">
     <br>
 
+
     <p class='display-2'><?php print($model->name) ?></p>
     <div class="row row-cols-2">
         <div class="col image">
@@ -86,5 +87,20 @@ $this->title = $model->name;
     </div>
 
 
-    
+    <script>
+    var getDataProvider = new Vue({
+        el: '.getDataProvider',
+        data: {
+            products: []
+        },
+        mounted: async function() {
+            const t = this
+            await fetch('http://localhost:8080/api/index', {
+                method: 'GET',
+            }).then(async response => {
+                t.products = await response.json()
+            })
+        }
+    })
+</script>
 </div>

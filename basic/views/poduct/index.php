@@ -42,19 +42,15 @@ $this->title = 'Poducts';
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="category">
-                            <?php foreach ($category->getModels() as $category) { ?>
-                                <a>
-                                    <p>
-                                    
+                        <a v-for="category in categorys">
+                            <p>
+                                <div class="custom-control custom-radio mb-3">
+                                    <input v-model="categorymodel" :value="category.id" v-bind:v-for="category.id" name="custom-radio-1" class="custom-control-input" v-bind:id="category.name" type="radio">
+                                    <label class="custom-control-label" v-bind:for="category.name">{{category.name}}</label>
+                                </div>
 
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input value="<?php print($category->id)  ?>" v-model="category" name="custom-radio-1" class="custom-control-input" id="<?php print($category->name)  ?>" type="radio">
-                                            <label class="custom-control-label" for="<?php print($category->name)  ?>"><?php print($category->name)  ?></label>
-                                        </div>
-
-                                    </p>
-                                </a>
-                            <?php } ?>
+                            </p>
+                        </a>
                         </div>
                     </div>
                 </div>
@@ -69,18 +65,15 @@ $this->title = 'Poducts';
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
-                        <?php foreach ($material->getModels() as $material) { ?>
-                            <a>
-                                <p>
-                                    <div class="custom-control custom-radio mb-3">
-                                        <input value="<?php print($material->id)  ?>" v-model="material" name="custom-radio-1" class="custom-control-input" id="<?php print($material->name)  ?>" type="radio">
-                                        <label class="custom-control-label" for="<?php print($material->name)  ?>"><?php print($material->name)  ?></label>
-                                    </div>
+                        <a v-for="material in materials">
+                            <p>
+                                <div class="custom-control custom-radio mb-3">
+                                    <input v-model="materialmodel" :value="material.id" v-bind:v-for="material.id" name="custom-radio-1" class="custom-control-input" v-bind:id="material.name" type="radio">
+                                    <label class="custom-control-label" v-bind:for="material.name">{{material.name}}</label>
+                                </div>
 
-
-                                </p>
-                            </a>
-                        <?php } ?>
+                            </p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -94,18 +87,15 @@ $this->title = 'Poducts';
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        <?php foreach ($season->getModels() as $season) { ?>
-                            <a>
-                                <p>
-                                    <div class="custom-control custom-radio mb-3">
-                                        <input value="<?php print($season->id)  ?>" v-model="season" name="custom-radio-1" class="custom-control-input" id="<?php print($season->name)  ?>" type="radio">
-                                        <label class="custom-control-label" for="<?php print($season->name)  ?>"><?php print($season->name)  ?></label>
-                                    </div>
+                        <a v-for="season in seasons">
+                            <p>
+                                <div class="custom-control custom-radio mb-3">
+                                    <input v-model="seasonmodel" :value="season.id" v-bind:v-for="season.id" name="custom-radio-1" class="custom-control-input" v-bind:id="season.name" type="radio">
+                                    <label class="custom-control-label" v-bind:for="season.name">{{season.name}}</label>
+                                </div>
 
-                                </p>
-                            </a>
-
-                        <?php } ?>
+                            </p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -117,48 +107,40 @@ $this->title = 'Poducts';
                         </button>
                     </h2>
                 </div>
-                <div id="collapsefore" class="collapse" aria-labelledby="headingfore" data-parent="#accordionExample">
+                <div id="collapsefore" class="collapse collapsefore" aria-labelledby="headingfore" data-parent="#accordionExample">
                     <div class="card-body">
-                        <?php foreach ($manufacturer->getModels() as $manufacturer) { ?>
-                            <a>
-                                <p>
-                                    <div class="custom-control custom-radio mb-3">
-                                        <input value="<?php print($manufacturer->id)  ?>" v-model="manufacturer" name="custom-radio-1" class="custom-control-input" id="<?php print($manufacturer->name)  ?>" type="radio">
-                                        <label class="custom-control-label" for="<?php print($manufacturer->name)  ?>"><?php print($manufacturer->name)  ?></label>
-                                    </div>
+                        <a v-for="manufacturer in manufacturers" :key="manufacturer.manufacturer">
+                            <p>
+                                <div class="custom-control custom-radio mb-3">
+                                    <input v-model="manufacturermodel" :value="manufacturer.id" v-bind:v-for="manufacturer.id" name="custom-radio-1" class="custom-control-input" v-bind:id="manufacturer.name" type="radio">
+                                    <label class="custom-control-label" v-bind:for="manufacturer.name">{{manufacturer.name}}</label>
+                                </div>
 
-                                </p>
-                            </a>
-                        <?php } ?>
+                            </p>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         <br>
-        <a class="btn btn-success" v-bind:href="'poduct?PoductSearch%5Bid%5D=&PoductSearch%5Bname%5D=&PoductSearch%5Bfile%5D=&PoductSearch%5Bprice%5D=&PoductSearch%5Btext%5D=&PoductSearch%5Bcategory_id%5D=' + category + '&PoductSearch%5Bdate%5D=&PoductSearch%5Bseason_id%5D=' + season + '&PoductSearch%5Bmaterial_id%5D=' + material + '&PoductSearch%5Bmanufacturer_id%5D=' + manufacturer">Применить</a>
+        <a class="btn btn-success" v-bind:href="'poduct?PoductSearch%5Bid%5D=&PoductSearch%5Bname%5D=&PoductSearch%5Bfile%5D=&PoductSearch%5Bprice%5D=&PoductSearch%5Btext%5D=&PoductSearch%5Bcategory_id%5D=' + categorymodel + '&PoductSearch%5Bdate%5D=&PoductSearch%5Bseason_id%5D=' + seasonmodel + '&PoductSearch%5Bmaterial_id%5D=' + materialmodel + '&PoductSearch%5Bmanufacturer_id%5D=' + manufacturermodel">Применить</a>
         <a class="btn btn-secondary" href="/poduct">Сбросить</a>
 
     </div>
     <br><br><br>
     <div class="row row-cols-3 getDataProvider">
+        <div v-for="product in products" :key="product.product" class="col">
 
-        <?php foreach ($dataProvider->getModels() as $model) { ?>
-
-            <div class="col">
-
-                <div class="card" style="width: 20rem;">
-                    <img src="<?= $model->file ?>" class="card-img-top" alt="<?= $model->file ?>">
-                    <div class="card-body">
-                        <a class="card-title alert-link h5" href="/poduct/view?id=<?= $model->id ?>"><?= $model->name ?></a>
-                        <p class="card-text"><?= $model->price ?> руб.
-                        </p>
-                    </div>
+            <div class="card" style="width: 20rem;">
+                <img v-bind:src="product.file" class="card-img-top" v-bind:alt="product.name">
+                <div class="card-body">
+                    <a class="card-title alert-link h5" v-bind:href="'/poduct/view?id=' + product.id">{{product.name}}</a>
+                    <p class="card-text">{{product.price}} руб.
+                    </p>
                 </div>
             </div>
-
-        <?php } ?>
+        </div>
     </div>
-
 </div>
 <script>
     var app6 = new Vue({
@@ -171,10 +153,52 @@ $this->title = 'Poducts';
     var filters = new Vue({
         el: '.filters',
         data: {
-            category: '',
-            material: '',
-            season: '',
-            manufacturer: '',
+            categorymodel: '',
+            materialmodel: '',
+            seasonmodel: '',
+            manufacturermodel: '',
+            manufacturers: [],
+            seasons: [],
+            materials: [],
+            categorys: [],
+        },
+        mounted: async function() {
+            const t = this
+            await fetch('http://localhost:8080/api/manufacturer', {
+                method: 'GET',
+            }).then(async response => {
+                t.manufacturers = await response.json()
+            })
+            await fetch('http://localhost:8080/api/season', {
+                method: 'GET',
+            }).then(async response => {
+                t.seasons = await response.json()
+            })
+            await fetch('http://localhost:8080/api/material', {
+                method: 'GET',
+            }).then(async response => {
+                t.materials = await response.json()
+            })
+            await fetch('http://localhost:8080/api/category', {
+                method: 'GET',
+            }).then(async response => {
+                t.categorys = await response.json()
+            })
+        }
+    })
+
+    var getDataProvider = new Vue({
+        el: '.getDataProvider',
+        data: {
+            products: []
+        },
+        mounted: async function() {
+            const t = this
+            await fetch('http://localhost:8080/api/index', {
+                method: 'GET',
+            }).then(async response => {
+                t.products = await response.json()
+            })
         }
     })
 </script>

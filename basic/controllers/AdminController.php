@@ -57,6 +57,9 @@ class AdminController extends Controller
      */
     public function actionView($id)
     {
+        if(Yii::$app->user->isGuest||!Yii::$app->user->isGuest&&!Yii::$app->user->identity->isAdmin()){
+            return $this->redirect(['/']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -70,7 +73,9 @@ class AdminController extends Controller
     public function actionCreate()
     {
         $model = new Poduct();
-
+        if(Yii::$app->user->isGuest||!Yii::$app->user->isGuest&&!Yii::$app->user->identity->isAdmin()){
+            return $this->redirect(['/']);
+        }
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -94,7 +99,9 @@ class AdminController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        if(Yii::$app->user->isGuest||!Yii::$app->user->isGuest&&!Yii::$app->user->identity->isAdmin()){
+            return $this->redirect(['/']);
+        }
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -113,6 +120,9 @@ class AdminController extends Controller
      */
     public function actionDelete($id)
     {
+        if(Yii::$app->user->isGuest||!Yii::$app->user->isGuest&&!Yii::$app->user->identity->isAdmin()){
+            return $this->redirect(['/']);
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

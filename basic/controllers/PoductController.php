@@ -92,6 +92,7 @@ class PoductController extends Controller
         $season = $searchModelSeason->search($this->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'id' => $id,
             'category' => $category,
             'material' => $material,
             'season' => $season,
