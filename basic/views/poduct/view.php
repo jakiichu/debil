@@ -10,26 +10,24 @@ $this->title = $model->name;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="poduct-view">
-    <br>
 
-
-    <p class='display-2'><?php print($model->name) ?></p>
+    <p class='display-2'>{{ product.name }}</p>
     <div class="row row-cols-2">
         <div class="col image">
-            <img value="<?php print($model->file) ?>" data-toggle="modal" data-target="#exampleModal" v-on:click="image" src="<?php print($model->file) ?>" style=" height:400px;">
+            <img :value="product.file" data-toggle="modal" data-target="#exampleModal" v-bind:src="product.file" style=" height:400px;">
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" style="margin: auto;height:1000px;">
                     <div class="modal-content" style="height:1000px;">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">{{ product.name }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                        <img  src="<?php print($model->file) ?>" style="height:1000px;">
+                            <img v-bind:src="product.file" style="height:1000px;">
 
                         </div>
                     </div>
@@ -37,7 +35,7 @@ $this->title = $model->name;
             </div>
         </div>
         <div class="col-7">
-            <p class='blockquote' style="height:600px;"><?php print($model->text) ?></p>
+            <p class='blockquote' style="height:600px;">{{product.text}}</p>
         </div>
 
     </div>
@@ -46,61 +44,80 @@ $this->title = $model->name;
     <br>
     <br>
 
-    <p class='display-2' style='   text-align: right;'><?php print($model->price) ?> руб.</p>
+    <p class='display-2' style='   text-align: right;'>{{product.price}} руб.</p>
     <hr>
     <h3>Харектеристики</h3>
     <hr>
     <h4>Категория</h4>
-    <?php foreach ($category->getModels() as $category) { ?>
-        <?php if ($model->category_id === $category->id) { ?>
-            <?php print($category->name)  ?>
-        <?php } ?>
-
-    <?php } ?>
+    <p>{{category.name}}</p>
     <br><br>
     <h4>Материал</h4>
-    <?php foreach ($material->getModels() as $material) { ?>
-        <?php if ($model->material_id === $material->id) { ?>
-            <?php print($material->name)  ?>
-        <?php } ?>
-
-    <?php } ?>
+    <p>{{material.name}}</p>
     <br><br>
     <h4>Сезон</h4>
-    <?php foreach ($season->getModels() as $season) { ?>
-        <?php if ($model->season_id === $season->id) { ?>
-            <?php print($season->name)  ?>
-        <?php } ?>
-
-    <?php } ?>
+    <p>{{season.name}}</p>
     <br><br>
     <h4>Производитель</h4>
-    <?php foreach ($manufacturer->getModels() as $manufacturer) { ?>
-        <?php if ($model->manufacturer_id === $manufacturer->id) { ?>
-            <?php print($manufacturer->name)  ?>
-        <?php } ?>
-
-    <?php } ?>
+    <p>{{manufacturer.name}}</p>
     <hr>
     <div>
-        <p class='' style='text-align: right;'> Дата добавления: <?php print($model->date) ?></p>
+        <p class='' style='text-align: right;'> Дата добавления: {{product.date}}</p>
     </div>
 
 
-    <script>
-    var getDataProvider = new Vue({
-        el: '.getDataProvider',
+
+</div>
+<script>
+    var poductView = new Vue({
+        el: '.poduct-view',
         data: {
-            products: []
+            products: [],
+            asd: '',
+            product: [],
+            manufacturers: [],
+            seasons: [],
+            materials: [],
+            categorys: [],
+            manufacturer: [],
+            season: [],
+            material: [],
+            category: [],
         },
         mounted: async function() {
+
             const t = this
+            t.asd = <?php print($id) ?> - 1
+ 
             await fetch('http://localhost:8080/api/index', {
                 method: 'GET',
             }).then(async response => {
                 t.products = await response.json()
             })
+            t.product = t.products[t.asd]
+            await fetch('http://localhost:8080/api/manufacturer', {
+                method: 'GET',
+            }).then(async response => {
+                t.manufacturers = await response.json()
+            })
+            await fetch('http://localhost:8080/api/season', {
+                method: 'GET',
+            }).then(async response => {
+                t.seasons = await response.json()
+            })
+            await fetch('http://localhost:8080/api/material', {
+                method: 'GET',
+            }).then(async response => {
+                t.materials = await response.json()
+            })
+            await fetch('http://localhost:8080/api/category', {
+                method: 'GET',
+            }).then(async response => {
+                t.categorys = await response.json()
+            })
+            t.manufacturer = t.manufacturers[t.product.manufacturer_id - 1]
+            t.season = t.seasons[t.product.season_id - 1]
+            t.material = t.materials[t.product.material_id - 1]
+            t.category = t.categorys[t.product.category_id - 1]
         }
     })
 </script>
-</div>
