@@ -45,7 +45,7 @@ $this->title = 'Poducts';
                                 <p>
                                     <div class="custom-control custom-radio mb-3">
                                         <input v-model="categorymodel" :value="category.id" v-bind:v-for="category.id" name="custom-radio-1" class="custom-control-input" v-bind:id="category.name" type="radio">
-                                        <label class="custom-control-label" v-bind:for="category.name">{{category.id}}{{category.name}}</label>
+                                        <label class="custom-control-label" v-bind:for="category.name">{{category.name}}</label>
                                     </div>
 
                                 </p>
