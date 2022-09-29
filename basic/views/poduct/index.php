@@ -21,12 +21,11 @@ $this->title = 'Poducts';
     }
 </style>
 <br>
-<div class="search" style="text-align:right;" id="app-6">
-    <input class="form-label" v-model="message">
-    <a class="btn btn-success btn-sm" v-bind:href="'poduct?PoductSearch%5Bid%5D=&PoductSearch%5Bname%5D=' + message + '&PoductSearch%5Bfile%5D=&PoductSearch%5Bprice%5D=&PoductSearch%5Btext%5D=&PoductSearch%5Bcategory_id%5D=&PoductSearch%5Bdate%5D=&PoductSearch%5Bseason_id%5D=&PoductSearch%5Bmaterial_id%5D=&PoductSearch%5Bmanufacturer_id%5D='">Поиск</a>
-</div>
-<div class="poduct-index">
 
+<div class="poduct-index">
+    <div class="search" style="text-align:right;" id="app-6">
+        <input class="form-label" v-model="message">
+    </div>
     <div class="filters">
         <br>
         <div style="width:350px;" class="accordion" id="accordionExample">
@@ -42,15 +41,15 @@ $this->title = 'Poducts';
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="category">
-                        <a v-for="category in categorys">
-                            <p>
-                                <div class="custom-control custom-radio mb-3">
-                                    <input v-model="categorymodel" :value="category.id" v-bind:v-for="category.id" name="custom-radio-1" class="custom-control-input" v-bind:id="category.name" type="radio">
-                                    <label class="custom-control-label" v-bind:for="category.name">{{category.name}}</label>
-                                </div>
+                            <a v-for="category in categorys">
+                                <p>
+                                    <div class="custom-control custom-radio mb-3">
+                                        <input v-model="categorymodel" :value="category.id" v-bind:v-for="category.id" name="custom-radio-1" class="custom-control-input" v-bind:id="category.name" type="radio">
+                                        <label class="custom-control-label" v-bind:for="category.name">{{category.id}}{{category.name}}</label>
+                                    </div>
 
-                            </p>
-                        </a>
+                                </p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -123,13 +122,12 @@ $this->title = 'Poducts';
             </div>
         </div>
         <br>
-        <a class="btn btn-success" v-bind:href="'poduct?PoductSearch%5Bid%5D=&PoductSearch%5Bname%5D=&PoductSearch%5Bfile%5D=&PoductSearch%5Bprice%5D=&PoductSearch%5Btext%5D=&PoductSearch%5Bcategory_id%5D=' + categorymodel + '&PoductSearch%5Bdate%5D=&PoductSearch%5Bseason_id%5D=' + seasonmodel + '&PoductSearch%5Bmaterial_id%5D=' + materialmodel + '&PoductSearch%5Bmanufacturer_id%5D=' + manufacturermodel">Применить</a>
         <a class="btn btn-secondary" href="/poduct">Сбросить</a>
 
     </div>
     <br><br><br>
     <div class="row row-cols-3 getDataProvider">
-        <div v-for="product in products" :key="product.product" class="col">
+        <div v-for="product in products" v-if="categorymodel == '' || categorymodel == product.category_id && materialmodel == '' || materialmodel == product.category_id && seasonmodel == '' || seasonmodel == product.category_id && manufacturermodel == '' || manufacturermodel == product.category_id && message == '' || message == product.name" class="col">
 
             <div class="card" style="width: 20rem;">
                 <img v-bind:src="product.file" class="card-img-top" v-bind:alt="product.name">
@@ -143,16 +141,10 @@ $this->title = 'Poducts';
     </div>
 </div>
 <script>
-    var app6 = new Vue({
-        el: '#app-6',
-        data: {
-            message: ''
-        }
-    })
-
     var filters = new Vue({
-        el: '.filters',
+        el: '.poduct-index',
         data: {
+            message: '',
             categorymodel: '',
             materialmodel: '',
             seasonmodel: '',
@@ -161,6 +153,12 @@ $this->title = 'Poducts';
             seasons: [],
             materials: [],
             categorys: [],
+            products: []
+        },
+        methods: {
+            filterCategory: function() {
+
+            }
         },
         mounted: async function() {
             const t = this
@@ -184,16 +182,6 @@ $this->title = 'Poducts';
             }).then(async response => {
                 t.categorys = await response.json()
             })
-        }
-    })
-
-    var getDataProvider = new Vue({
-        el: '.getDataProvider',
-        data: {
-            products: []
-        },
-        mounted: async function() {
-            const t = this
             await fetch('http://localhost:8080/api/index', {
                 method: 'GET',
             }).then(async response => {
