@@ -126,6 +126,7 @@ $this->title = 'Poducts';
 
     </div>
     <br><br><br>
+    
     <div class="row row-cols-3 getDataProvider">
         <div v-for="product in products" v-if="categorymodel == '' || categorymodel == product.category_id && materialmodel == '' || materialmodel == product.category_id && seasonmodel == '' || seasonmodel == product.category_id && manufacturermodel == '' || manufacturermodel == product.category_id && message == '' || message == product.name" class="col">
 
@@ -154,11 +155,6 @@ $this->title = 'Poducts';
             materials: [],
             categorys: [],
             products: []
-        },
-        methods: {
-            filterCategory: function() {
-
-            }
         },
         mounted: async function() {
             const t = this

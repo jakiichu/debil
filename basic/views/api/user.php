@@ -3,7 +3,7 @@ error_reporting(0);
 require 'rb.php';
 
 R::setup('mysql:host=localhost;dbname=voetorg_shop;', 'root', '');
-$getData = R::getAll('SELECT * FROM `poduct`', []);
+$getData = R::getAll('SELECT * FROM `user`', []);
 
 $arrayReturn = [];
 foreach($getData as $item){

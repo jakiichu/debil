@@ -32,4 +32,9 @@ class ApiController extends \yii\web\Controller
         $this->layout = false;
         return $this->render('category');
     }
+    public function actionUser()
+        {
+            $this->layout = false;
+            return $this->render('user');
+        }
 }

@@ -12,12 +12,15 @@ use app\models\Post;
 use app\models\PostSearch;
 use yii\bootstrap4\Accordion;
 use yii\web\UploadedFile;
+use yii\rest\ActiveController;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller
+class UserController extends ActiveController
 {
+    public $modelClass = 'app\models\User';
+
     /**
      * @inheritDoc
      */

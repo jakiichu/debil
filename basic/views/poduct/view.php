@@ -10,7 +10,6 @@ $this->title = $model->name;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="poduct-view">
-
     <p class='display-2'>{{ product.name }}</p>
     <div class="row row-cols-2">
         <div class="col image">

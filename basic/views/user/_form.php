@@ -20,9 +20,6 @@ use yii\bootstrap4\Html;
 
     <?= $form->field($model, 'patronymic')->textInput(['maxlength' => true]) ?>
 
-
-
-
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
     <div class="form-group">
@@ -32,3 +29,20 @@ use yii\bootstrap4\Html;
     <?php ActiveForm::end(); ?>
 
 </div>
+<script>
+        var filters = new Vue({
+            el: '.poduct-index',
+            data: {
+
+                users: []
+            },
+            mounted: async function() {
+                const t = this
+                await fetch('http://localhost:8080/api/user', {
+                    method: 'GET',
+                }).then(async response => {
+                    t.users = await response.json()
+                })
+            }
+        })
+</script>
